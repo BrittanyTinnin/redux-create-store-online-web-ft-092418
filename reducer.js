@@ -1,8 +1,9 @@
-function createStore() {
+function createStore(reducer) {
   let state;
  
   function dispatch(action) {
-    state = changeCount(state, action);
+    // state = changeCount(state, action);
+    state = reducer(state, action);
     render();
   }
  
