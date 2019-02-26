@@ -17,7 +17,7 @@ function dispatch(action){
 
 function render() {
   let container = document.getElementById('container');
-  container.textContent = state.count;
+  container.textContent = store.getState().count;
 };
 
 dispatch({ type: '@@INIT' })
@@ -26,3 +26,21 @@ let button = document.getElementById('button');
 button.addEventListener('click', function() {
     dispatch({ type: 'INCREASE_COUNT' });
 })
+
+function createStore() {
+  let state;
+ 
+  function dispatch(action) {
+    state = changeCount(state, action);
+    render();
+  }
+ 
+  function getState() {
+    return state;
+  }
+ 
+  return {
+    dispatch,
+    getState
+  };
+};
